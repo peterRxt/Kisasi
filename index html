@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Ruth's Story 💜</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #f4f4f4;
+      color: #2f3640;
+    }
+
+    .container {
+      max-width: 960px;
+      margin: 20px auto;
+      background: #fff;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    header h1 {
+      font-size: 2.5em;
+      color: #8e44ad;
+      margin: 0;
+    }
+
+    .story-section p {
+      font-size: 1.1em;
+      line-height: 1.8;
+      margin-bottom: 15px;
+    }
+
+    .story-section p strong {
+      color: #555;
+    }
+
+    .image-gallery {
+      margin-top: 40px;
+      padding-top: 30px;
+      border-top: 2px solid #eee;
+    }
+
+    .image-gallery h2 {
+      text-align: center;
+      font-size: 2em;
+      color: #8e44ad;
+      margin-bottom: 20px;
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+      gap: 12px;
+    }
+
+    .gallery-grid img {
+      width: 100%;
+      height: 120px;
+      object-fit: cover;
+      border-radius: 8px;
+      cursor: pointer;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+      transition: transform 0.2s;
+    }
+
+    .gallery-grid img:hover {
+      transform: scale(1.05);
+    }
+
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 999;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.8);
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .modal img {
+      max-width: 100%;
+      max-height: 90vh;
+      border-radius: 10px;
+      box-shadow: 0 0 10px #fff;
+    }
+
+    .modal.show {
+      display: flex;
+    }
+
+    @media (min-width: 768px) {
+      .gallery-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      .gallery-grid img {
+        height: 150px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      header h1 {
+        font-size: 2em;
+      }
+
+      .story-section p {
+        font-size: 1em;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Ruth - Kisasi 💕</h1>
+    </header>
+
+    <section class="story-section">
+      <p>I first met <strong>Ruth</strong> 💁‍♀️, whom I called <strong>Kisasi</strong> 💜, in <strong>April 2023</strong> 📅. She was a beautiful <strong>Kamba</strong> woman 🌺, young and, just <strong>20 years</strong> old 🎂.</p>
+      
+      <p>Our time together often involved <strong>Sunday visits</strong> 🏡, sometimes leading to <strong>sleepovers</strong>
+    </section>
+
+    <section class="image-gallery">
+      <h2>Memories 📸</h2>
+      <div id="imageContainer" class="gallery-grid"></div>
+    </section>
+  </div>
+
+  <!-- Image Preview Modal -->
+  <div class="modal" id="imageModal">
+    <img id="modalImage" src="" alt="Preview">
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const imageContainer = document.getElementById('imageContainer');
+      const modal = document.getElementById('imageModal');
+      const modalImg = document.getElementById('modalImage');
+
+      const numberOfImages = 200;
+
+      for (let i = 1; i <= numberOfImages; i++) {
+        const img = document.createElement('img');
+        img.src = `${i}.jpg`;
+        img.alt = `Memory ${i}`;
+        
+        img.onload = function () {
+          imageContainer.appendChild(img);
+          img.addEventListener('click', () => {
+            modalImg.src = img.src;
+            modal.classList.add('show');
+          });
+        };
+
+        img.onerror = function () {
+          console.warn(`Image ${i}.jpg not found or failed to load.`);
+        };
+      }
+
+      modal.addEventListener('click', () => {
+        modal.classList.remove('show');
+        modalImg.src = '';
+      });
+    });
+  </script>
+</body>
+</html>
